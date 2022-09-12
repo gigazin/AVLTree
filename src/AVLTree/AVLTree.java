@@ -52,9 +52,9 @@ public class AVLTree {
                 if (actualNode.getRight() != null) {
                     insert(info, actualNode.getRight());
                 } else { // Found an empty node, inserting.
-                    AVLTreeNode novoNo = new AVLTreeNode(info);
-                    actualNode.setRight(novoNo);
-                    novoNo.setParent(actualNode);
+                    AVLTreeNode newNode = new AVLTreeNode(info);
+                    actualNode.setRight(newNode);
+                    newNode.setParent(actualNode);
                 }
             } else {
                 System.out.println("Repeated value.");
@@ -86,12 +86,17 @@ public class AVLTree {
             System.out.println("Empty tree.");
             return null;
         }
+        /* Checks if the given value is lower or higher than the value of the actual node.
+        * If higher, goes right. Else, goes left. */
         if (info < actualNode.getInfo()) {
             actualNode.setLeft(delete(info, actualNode.getLeft()));
         } else if (info > actualNode.getInfo()) {
             actualNode.setRight(delete(info, actualNode.getRight()));
         } else {
+            /* Checks if the node has no children. */
             if (actualNode.getRight() == null && actualNode.getLeft() == null) {
+                /* If node is root, remove root by setting it to null.
+                * Else, node is leaf, remove it by setting it to null. */
                 if (actualNode == root) {
                     this.root = null;
                 } else {
