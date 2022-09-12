@@ -87,7 +87,7 @@ public class AVLTree {
             return null;
         }
         /* Checks if the given value is lower or higher than the value of the actual node.
-        * If higher, goes right. Else, goes left. */
+         * If higher, goes right. Else, goes left. */
         if (info < actualNode.getInfo()) {
             actualNode.setLeft(delete(info, actualNode.getLeft()));
         } else if (info > actualNode.getInfo()) {
@@ -96,7 +96,7 @@ public class AVLTree {
             /* Checks if the node has no children. */
             if (actualNode.getRight() == null && actualNode.getLeft() == null) {
                 /* If node is root, remove root by setting it to null.
-                * Else, node is leaf, remove it by setting it to null. */
+                 * Else, node is leaf, remove it by setting it to null. */
                 if (actualNode == root) {
                     this.root = null;
                 } else {
@@ -116,8 +116,8 @@ public class AVLTree {
                 actualNode.setLeft(delete(info, actualNode.getLeft()));
             }
         }
-        /* After deleting a node, check if the tree isn't empty. Also, adjust its balance. */
-        if (this.root != null) {
+        /* After deleting a node, check if the tree isn't empty. Also, adjust its balance if needed. */
+        if (!this.isEmpty() && (getBalanceFactor() < -1 || getBalanceFactor() > 1)) {
             balanceAdjust(actualNode);
             this.root = treeBalancer(root);
         }
